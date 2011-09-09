@@ -1,0 +1,241 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="PivecPromotionModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="PivecPromotionModelStoreContainer">
+          <EntitySet Name="Customers" EntityType="PivecPromotionModel.Store.Customers" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Dealers" EntityType="PivecPromotionModel.Store.Dealers" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Promotions" EntityType="PivecPromotionModel.Store.Promotions" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Users" EntityType="PivecPromotionModel.Store.Users" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_Customers_Dealers" Association="PivecPromotionModel.Store.FK_Customers_Dealers">
+            <End Role="Dealers" EntitySet="Dealers" />
+            <End Role="Customers" EntitySet="Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customers_Promotions" Association="PivecPromotionModel.Store.FK_Customers_Promotions">
+            <End Role="Promotions" EntitySet="Promotions" />
+            <End Role="Customers" EntitySet="Customers" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Customers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="PromotionId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="DealerId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="SalespersonCode" Type="varchar" Nullable="false" MaxLength="25" />
+          <Property Name="DriverLicenseNumber" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="FirstName" Type="varchar" Nullable="false" MaxLength="25" />
+          <Property Name="LastName" Type="varchar" Nullable="false" MaxLength="25" />
+          <Property Name="Address" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="Email" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Dealers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Promotions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Login" Type="varchar" Nullable="false" MaxLength="25" />
+          <Property Name="Password" Type="varchar(max)" Nullable="false" />
+          <Property Name="IsAdmin" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Customers_Dealers">
+          <End Role="Dealers" Type="PivecPromotionModel.Store.Dealers" Multiplicity="1" />
+          <End Role="Customers" Type="PivecPromotionModel.Store.Customers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dealers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Customers">
+              <PropertyRef Name="DealerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customers_Promotions">
+          <End Role="Promotions" Type="PivecPromotionModel.Store.Promotions" Multiplicity="1" />
+          <End Role="Customers" Type="PivecPromotionModel.Store.Customers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Promotions">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Customers">
+              <PropertyRef Name="PromotionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PivecPromotionModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="PivecPromotionEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Customers" EntityType="PivecPromotionModel.Customer" />
+          <EntitySet Name="Dealers" EntityType="PivecPromotionModel.Dealer" />
+          <EntitySet Name="Promotions" EntityType="PivecPromotionModel.Promotion" />
+          <EntitySet Name="Users" EntityType="PivecPromotionModel.User" />
+          <AssociationSet Name="FK_Customers_Dealers" Association="PivecPromotionModel.FK_Customers_Dealers">
+            <End Role="Dealers" EntitySet="Dealers" />
+            <End Role="Customers" EntitySet="Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customers_Promotions" Association="PivecPromotionModel.FK_Customers_Promotions">
+            <End Role="Promotions" EntitySet="Promotions" />
+            <End Role="Customers" EntitySet="Customers" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="PromotionId" Type="Guid" Nullable="false" />
+          <Property Name="DealerId" Type="Guid" Nullable="false" />
+          <Property Name="SalespersonCode" Type="String" Nullable="false" MaxLength="25" Unicode="false" FixedLength="false" />
+          <Property Name="DriverLicenseNumber" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="25" Unicode="false" FixedLength="false" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="25" Unicode="false" FixedLength="false" />
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="Dealer" Relationship="PivecPromotionModel.FK_Customers_Dealers" FromRole="Customers" ToRole="Dealers" />
+          <NavigationProperty Name="Promotion" Relationship="PivecPromotionModel.FK_Customers_Promotions" FromRole="Customers" ToRole="Promotions" />
+        </EntityType>
+        <EntityType Name="Dealer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Customers" Relationship="PivecPromotionModel.FK_Customers_Dealers" FromRole="Dealers" ToRole="Customers" />
+        </EntityType>
+        <EntityType Name="Promotion">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Customers" Relationship="PivecPromotionModel.FK_Customers_Promotions" FromRole="Promotions" ToRole="Customers" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Login" Type="String" Nullable="false" MaxLength="25" Unicode="false" FixedLength="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="IsAdmin" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Customers_Dealers">
+          <End Role="Dealers" Type="PivecPromotionModel.Dealer" Multiplicity="1" />
+          <End Role="Customers" Type="PivecPromotionModel.Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dealers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Customers">
+              <PropertyRef Name="DealerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customers_Promotions">
+          <End Role="Promotions" Type="PivecPromotionModel.Promotion" Multiplicity="1" />
+          <End Role="Customers" Type="PivecPromotionModel.Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Promotions">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Customers">
+              <PropertyRef Name="PromotionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PivecPromotionModelStoreContainer" CdmEntityContainer="PivecPromotionEntities">
+          <EntitySetMapping Name="Customers"><EntityTypeMapping TypeName="PivecPromotionModel.Customer"><MappingFragment StoreEntitySet="Customers">
+            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="PromotionId" ColumnName="PromotionId" />
+            <ScalarProperty Name="DealerId" ColumnName="DealerId" />
+            <ScalarProperty Name="SalespersonCode" ColumnName="SalespersonCode" />
+            <ScalarProperty Name="DriverLicenseNumber" ColumnName="DriverLicenseNumber" />
+            <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+            <ScalarProperty Name="LastName" ColumnName="LastName" />
+            <ScalarProperty Name="Address" ColumnName="Address" />
+            <ScalarProperty Name="Email" ColumnName="Email" />
+            <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Dealers"><EntityTypeMapping TypeName="PivecPromotionModel.Dealer"><MappingFragment StoreEntitySet="Dealers">
+            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="Name" ColumnName="Name" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Promotions"><EntityTypeMapping TypeName="PivecPromotionModel.Promotion"><MappingFragment StoreEntitySet="Promotions">
+            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="Name" ColumnName="Name" />
+            <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Users"><EntityTypeMapping TypeName="PivecPromotionModel.User"><MappingFragment StoreEntitySet="Users">
+            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="Login" ColumnName="Login" />
+            <ScalarProperty Name="Password" ColumnName="Password" />
+            <ScalarProperty Name="IsAdmin" ColumnName="IsAdmin" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="PivecPromotion">
+        <EntityTypeShape EntityType="PivecPromotionModel.Customer" Width="1.5" PointX="3" PointY="1" Height="3.3263964843749996" IsExpanded="true" />
+        <EntityTypeShape EntityType="PivecPromotionModel.Dealer" Width="1.5" PointX="0.75" PointY="1.875" Height="1.5956835937499996" IsExpanded="true" />
+        <EntityTypeShape EntityType="PivecPromotionModel.Promotion" Width="1.5" PointX="0.75" PointY="5.75" Height="1.7879850260416657" IsExpanded="true" />
+        <EntityTypeShape EntityType="PivecPromotionModel.User" Width="1.5" PointX="5.75" PointY="0.75" Height="1.7879850260416657" IsExpanded="true" />
+        <AssociationConnector Association="PivecPromotionModel.FK_Customers_Dealers" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="2.672841796875" />
+          <ConnectorPoint PointX="3" PointY="2.672841796875" />
+        </AssociationConnector>
+        <AssociationConnector Association="PivecPromotionModel.FK_Customers_Promotions" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="6.6439925130208328" />
+          <ConnectorPoint PointX="3.75" PointY="6.6439925130208328" />
+          <ConnectorPoint PointX="3.75" PointY="4.326396484375" />
+        </AssociationConnector>
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>
