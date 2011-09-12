@@ -27,6 +27,7 @@ namespace Pivec.Promotion.Data
 
             [Display(Name = "Driver License Number")]
             [Required]
+            [Integer]
             public string DriverLicenseNumber { get; set; }
 
             [Display(Name = "First Name")]
