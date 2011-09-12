@@ -8,9 +8,8 @@ namespace Pivec.Promotion.Web.Controllers
 {
     public class RulesController : Controller
     {
-        //
-        // GET: /Rules/
 
+        [Authorize]
         public ActionResult Index()
         {
             return View();

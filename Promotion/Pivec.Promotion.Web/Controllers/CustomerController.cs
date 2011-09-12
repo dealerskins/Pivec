@@ -15,19 +15,22 @@ namespace Pivec.Promotion.Web.Controllers
     {
         private PivecPromotionEntities db = new PivecPromotionEntities();
 
+        [Authorize(Roles = "Administrator")]
         public ViewResult Index()
         {
             var customers = db.Customers.Include("Dealer");
             return View(customers.ToList());
         }
 
+        [Authorize]
         public ActionResult Create()
         {
             ViewBag.DealerId = new SelectList(db.Dealers, "Id", "Name");
             //ViewBag.PromotionId = new SelectList(db.Promotions, "Id", "Name");
             return View();
-        } 
+        }
 
+        [Authorize]
         [HttpPost]
         public ActionResult Create(Customer customer)
         {
@@ -58,7 +61,7 @@ namespace Pivec.Promotion.Web.Controllers
                 SendThankYouEmail(customer.Email);
 
                 // Logs off the user and returns them to the Login Page.
-                return RedirectToAction("Index");
+                return RedirectToAction("LogOff", "Account");
             }
 
             ViewBag.DealerId = new SelectList(db.Dealers, "Id", "Name", customer.DealerId);

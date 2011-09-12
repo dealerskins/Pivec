@@ -8,9 +8,8 @@ namespace Pivec.Promotion.Web.Controllers
 {
     public class ErrorController : Controller
     {
-        //
-        // GET: /Error/
 
+        [Authorize]
         public ActionResult Error(string errorMessage = "")
         {
             ViewData.Add(new KeyValuePair<string, object>("ErrorMessage", errorMessage)) ;
