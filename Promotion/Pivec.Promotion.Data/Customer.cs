@@ -23,6 +23,7 @@ namespace Pivec.Promotion.Data
 
             [Display(Name = "Salesperson Code")]
             [Required]
+            [RegularExpression(@"^\d*$")]
             public string SalespersonCode { get; set; }
 
             [Display(Name = "Driver License Number")]
@@ -43,6 +44,7 @@ namespace Pivec.Promotion.Data
 
             [Display(Name = "eMail")]
             [Required]
+            [DataType(DataType.EmailAddress)]
             public string Email { get; set; }
 
             [Display(Name = "Creation Date")]

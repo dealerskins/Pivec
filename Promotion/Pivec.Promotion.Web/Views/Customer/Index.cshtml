@@ -1,14 +1,11 @@
 ﻿@model IEnumerable<Pivec.Promotion.Data.Customer>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Registered Customers";
 }
 
-<h2>Index</h2>
+<h2>Registered Customers</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table>
     <tr>
         <th>
@@ -19,9 +16,6 @@
         </th>
         <th>
             SalespersonCode
-        </th>
-        <th>
-            DriverLicenseNumber
         </th>
         <th>
             FirstName
@@ -51,9 +45,6 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.SalespersonCode)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DriverLicenseNumber)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.FirstName)
