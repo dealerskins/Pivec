@@ -118,22 +118,6 @@ namespace Pivec.Promotion.Data
             }
         }
         private ObjectSet<Promotion> _Promotions;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<User> Users
-        {
-            get
-            {
-                if ((_Users == null))
-                {
-                    _Users = base.CreateObjectSet<User>("Users");
-                }
-                return _Users;
-            }
-        }
-        private ObjectSet<User> _Users;
 
         #endregion
         #region AddTo Methods
@@ -160,14 +144,6 @@ namespace Pivec.Promotion.Data
         public void AddToPromotions(Promotion promotion)
         {
             base.AddObject("Promotions", promotion);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the Users EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToUsers(User user)
-        {
-            base.AddObject("Users", user);
         }
 
         #endregion
@@ -782,139 +758,6 @@ namespace Pivec.Promotion.Data
         }
 
         #endregion
-    }
-    
-    /// <summary>
-    /// No Metadata Documentation available.
-    /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="PivecPromotionModel", Name="User")]
-    [Serializable()]
-    [DataContractAttribute(IsReference=true)]
-    public partial class User : EntityObject
-    {
-        #region Factory Method
-    
-        /// <summary>
-        /// Create a new User object.
-        /// </summary>
-        /// <param name="id">Initial value of the Id property.</param>
-        /// <param name="login">Initial value of the Login property.</param>
-        /// <param name="password">Initial value of the Password property.</param>
-        /// <param name="isAdmin">Initial value of the IsAdmin property.</param>
-        public static User CreateUser(global::System.Guid id, global::System.String login, global::System.String password, global::System.Boolean isAdmin)
-        {
-            User user = new User();
-            user.Id = id;
-            user.Login = login;
-            user.Password = password;
-            user.IsAdmin = isAdmin;
-            return user;
-        }
-
-        #endregion
-        #region Primitive Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Guid Id
-        {
-            get
-            {
-                return _Id;
-            }
-            set
-            {
-                if (_Id != value)
-                {
-                    OnIdChanging(value);
-                    ReportPropertyChanging("Id");
-                    _Id = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("Id");
-                    OnIdChanged();
-                }
-            }
-        }
-        private global::System.Guid _Id;
-        partial void OnIdChanging(global::System.Guid value);
-        partial void OnIdChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String Login
-        {
-            get
-            {
-                return _Login;
-            }
-            set
-            {
-                OnLoginChanging(value);
-                ReportPropertyChanging("Login");
-                _Login = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("Login");
-                OnLoginChanged();
-            }
-        }
-        private global::System.String _Login;
-        partial void OnLoginChanging(global::System.String value);
-        partial void OnLoginChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String Password
-        {
-            get
-            {
-                return _Password;
-            }
-            set
-            {
-                OnPasswordChanging(value);
-                ReportPropertyChanging("Password");
-                _Password = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("Password");
-                OnPasswordChanged();
-            }
-        }
-        private global::System.String _Password;
-        partial void OnPasswordChanging(global::System.String value);
-        partial void OnPasswordChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Boolean IsAdmin
-        {
-            get
-            {
-                return _IsAdmin;
-            }
-            set
-            {
-                OnIsAdminChanging(value);
-                ReportPropertyChanging("IsAdmin");
-                _IsAdmin = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("IsAdmin");
-                OnIsAdminChanged();
-            }
-        }
-        private global::System.Boolean _IsAdmin;
-        partial void OnIsAdminChanging(global::System.Boolean value);
-        partial void OnIsAdminChanged();
-
-        #endregion
-    
     }
 
     #endregion
