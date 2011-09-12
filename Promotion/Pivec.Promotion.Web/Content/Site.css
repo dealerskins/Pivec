@@ -2,8 +2,8 @@ body
 {
     font-size: .85em;
     font-family: "Trebuchet MS", Verdana, Helvetica, Sans-Serif;
-    color: #232323;
-    background-color: #fff;
+    color: #463E38;
+    background-color: #eee;
 }
 
 header,
@@ -72,4 +72,68 @@ textarea
 .validation-summary-valid
 {
     display: none;
+}
+
+/* PRIMARY LAYOUT ELEMENTS   
+----------------------------------------------------------*/
+
+.page {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+header {
+    position: relative;
+    color: #fff;
+    padding: 0;
+    padding-bottom: 80px;
+    background-color: #DC0035;
+}
+
+header h1 {
+    font-weight: bold;
+    padding: 5px 0;
+    margin: 0;
+    border: none;
+    line-height: 2em;
+    font-size: 32px !important;
+}
+
+#main {
+    padding: 30px 30px 15px 30px;
+    background-color: #fff;
+}
+
+footer {
+    background-color: #fff;
+    color: #999;
+    padding: 10px 0;
+    text-align: center;
+    line-height: normal;
+    margin: 0 0 30px 0;
+    font-size: .9em;
+}
+
+/* MISC  
+----------------------------------------------------------*/
+
+#title {
+    display: block;
+    float: left;
+    text-align: left;
+}
+
+#logindisplay {
+    font-size: 1.1em;
+    display: block;
+    text-align: right;
+    margin: 10px;
+}
+
+#logindisplay a:link,
+#logindisplay a:visited,
+#logindisplay a:hover {
+    color: #fff;
+    text-decoration: underline;
 }

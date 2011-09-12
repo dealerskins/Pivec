@@ -26,14 +26,14 @@ namespace Pivec.Promotion.Web
                 new { controller = "Error", action = "Error", errorMessage = UrlParameter.Optional }
                 );
             routes.MapRoute(
-                "Rules",
-                "",
-                new {controller = "Rules", action = "Index"}
-                );
+                "LogOn", // Route name
+                "", // URL with parameters
+                new { controller = "Account", action = "LogOn" } // Parameter defaults
+            );
             routes.MapRoute(
                 "Default", // Route name
                 "{controller}/{action}/{id}", // URL with parameters
-                new { controller = "Home", action = "Index", id = UrlParameter.Optional } // Parameter defaults
+                new { controller = "Rules", action = "Index", id = UrlParameter.Optional } // Parameter defaults
             );
 
         }

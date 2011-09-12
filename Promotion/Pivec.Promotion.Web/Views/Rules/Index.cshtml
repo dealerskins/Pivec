@@ -1,7 +1,51 @@
 ﻿@{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Rules";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
-THIS IS MY INITIAL PAGE
+<div>
+    <fieldset>
+        <legend>Rules and Instructions</legend>
+
+        <div>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi at felis eget odio adipiscing fringilla 
+            sit amet in enim. Nullam venenatis arcu ac nisi accumsan vel consequat quam pharetra. Maecenas est lectus, 
+            tincidunt vel faucibus a, facilisis id elit. Sed eu lacus felis, non auctor sem. Nulla sit amet suscipit enim. 
+            Duis eget purus sit amet nibh luctus egestas. Duis ullamcorper augue vitae metus tincidunt aliquet fringilla 
+            id felis. Aliquam malesuada turpis quis ipsum suscipit ultricies sed eget erat.
+            <br/><br/>
+            Morbi et urna vehicula massa fringilla venenatis. Aliquam a mauris lectus, quis scelerisque nisi. Aenean 
+            euismod pretium dolor sed pharetra. Cras in rutrum nisl. Nullam placerat ultricies lectus quis consequat. 
+            Maecenas id odio vel leo ultrices luctus et sit amet diam. Nulla scelerisque enim quis ipsum consequat 
+            condimentum vehicula justo vehicula. Proin eleifend varius sem, ut condimentum mi pellentesque quis. 
+            Duis rhoncus tempus rhoncus. Sed quis est ac eros lobortis pulvinar. Ut ut tincidunt lectus. 
+            Donec vestibulum ipsum luctus risus varius luctus.
+            <br/><br/>
+            Nullam lacinia justo enim, id pretium ante. Phasellus sagittis iaculis sapien, sed sagittis risus vestibulum et. 
+            Aenean augue neque, aliquet facilisis rhoncus dignissim, tempor nec ligula. Morbi vel ligula eget lacus tempor 
+            eleifend. Proin eu justo vel dui aliquet venenatis vitae et turpis. Maecenas nisi metus, accumsan in faucibus 
+            euismod, suscipit sit amet nulla. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur 
+            ridiculus mus. Suspendisse velit erat, porttitor venenatis vulputate eu, tempus at orci. Nulla a augue a tellus 
+            lobortis scelerisque. Proin erat tellus, malesuada in feugiat eu, vehicula tincidunt lectus. Maecenas congue 
+            blandit leo. Pellentesque consequat iaculis luctus. Suspendisse cursus semper eleifend. Donec iaculis ipsum 
+            nec magna tincidunt ullamcorper.
+            <br/><br/>
+            Morbi ligula odio, ultricies a scelerisque nec, tempus vel lectus. Curabitur mollis molestie orci, et aliquam 
+            metus imperdiet vitae. Maecenas ut leo leo, et congue sem. Aliquam eget libero tellus. Nam in lobortis metus. 
+            Pellentesque quis elit dolor, ac hendrerit elit. In porta aliquam ligula, ut scelerisque tellus tincidunt ut. 
+            Donec a aliquet elit. Pellentesque id sodales nisi. Sed pellentesque sodales lectus, eu porttitor dui 
+            suscipit ac.
+            <br/><br/>
+            Suspendisse quis tincidunt est. In quis nulla turpis, vitae tempor ipsum. Suspendisse potenti. Integer id 
+            neque nulla, elementum ultricies nunc. Sed vel nisl nibh, ac pulvinar dolor. Fusce ultrices, enim non venenatis 
+            bibendum, nibh ipsum aliquet ipsum, id lobortis erat mi id eros. Vestibulum sodales enim ut diam vulputate 
+            porttitor. Phasellus vel libero arcu. Vivamus lectus eros, lobortis faucibus aliquet pellentesque, feugiat vel 
+            sapien. Integer sed erat tortor. Integer malesuada tempus tortor, eu mollis mi porttitor a.
+        </div>
+        
+        <p>
+            @Html.ActionLink("I Agree", "Create", "Customer")
+            @Html.ActionLink("Cancel", "LogOff", "Account")
+        </p>
+    </fieldset>
+</div>
