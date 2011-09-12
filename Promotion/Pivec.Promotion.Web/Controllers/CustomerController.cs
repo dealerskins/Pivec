@@ -37,10 +37,27 @@ namespace Pivec.Promotion.Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                string licenseHashCode = customer.DriverLicenseNumber.GetHashCode().ToString();
+
+                var userRegistered = (from c in db.Customers
+                                      where
+                                          c.DriverLicenseNumber.Equals(licenseHashCode)
+                                      select c).ToList();
+
+                if (userRegistered.Count > 0)
+                {
+                    return RedirectToRoute("Error",
+                                           new {errorMessage = "The customer has already been added to the promotion"});
+                    //return RedirectToAction("Error", "Error", new { errorMessage = "The User is already registered in the Data Base." });
+                }
+
                 customer.Id = Guid.NewGuid();
+                customer.DateCreated = DateTime.UtcNow;
+                customer.DriverLicenseNumber = customer.DriverLicenseNumber.GetHashCode().ToString();
                 db.Customers.AddObject(customer);
                 db.SaveChanges();
-                return RedirectToAction("Index");  
+
+                return RedirectToAction("Index");
             }
 
             ViewBag.DealerId = new SelectList(db.Dealers, "Id", "Name", customer.DealerId);

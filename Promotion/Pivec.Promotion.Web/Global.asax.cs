@@ -20,7 +20,16 @@ namespace Pivec.Promotion.Web
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
-
+            routes.MapRoute(
+                "Error",
+                "error/{errorMessage}",
+                new { controller = "Error", action = "Error", errorMessage = UrlParameter.Optional }
+                );
+            routes.MapRoute(
+                "Rules",
+                "",
+                new {controller = "Rules", action = "Index"}
+                );
             routes.MapRoute(
                 "Default", // Route name
                 "{controller}/{action}/{id}", // URL with parameters
