@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "Customer Form";
+    
 }
 
 <h2>Customer Form</h2>
@@ -35,6 +36,12 @@
         <div class="editor-field">
             @Html.EditorFor(model => model.DriverLicenseNumber)
             @Html.ValidationMessageFor(model => model.DriverLicenseNumber)
+            @{
+                if (ViewData["LicenseError"] != null)
+                {
+                    @ViewData["ErrorMessage"]
+                }
+            }
         </div>
 
         <div class="editor-label">
@@ -70,6 +77,12 @@
         </div>
         <p>
             <input type="submit" value="Create" />
+            @{
+                if (ViewData["PromotionError"]!= null )
+                {
+                    @ViewData["ErrorMessage"]
+                }
+            }
         </p>
     </fieldset>
 }
