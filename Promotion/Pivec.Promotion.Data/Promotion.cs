@@ -11,7 +11,6 @@ namespace Pivec.Promotion.Data
     {
         private class PromotionMetadata
         {
-            [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
             public Guid Id { get; set; }
 
             [Display(Name = "Promotion Name")]

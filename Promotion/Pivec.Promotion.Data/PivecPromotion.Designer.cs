@@ -174,10 +174,13 @@ namespace Pivec.Promotion.Data
         /// <param name="driverLicenseNumber">Initial value of the DriverLicenseNumber property.</param>
         /// <param name="firstName">Initial value of the FirstName property.</param>
         /// <param name="lastName">Initial value of the LastName property.</param>
-        /// <param name="address">Initial value of the Address property.</param>
+        /// <param name="streetAddress">Initial value of the StreetAddress property.</param>
+        /// <param name="city">Initial value of the City property.</param>
+        /// <param name="state">Initial value of the State property.</param>
+        /// <param name="zipCode">Initial value of the ZipCode property.</param>
         /// <param name="email">Initial value of the Email property.</param>
         /// <param name="dateCreated">Initial value of the DateCreated property.</param>
-        public static Customer CreateCustomer(global::System.Guid id, global::System.Guid promotionId, global::System.Guid dealerId, global::System.String salespersonCode, global::System.String driverLicenseNumber, global::System.String firstName, global::System.String lastName, global::System.String address, global::System.String email, global::System.DateTime dateCreated)
+        public static Customer CreateCustomer(global::System.Guid id, global::System.Guid promotionId, global::System.Guid dealerId, global::System.String salespersonCode, global::System.String driverLicenseNumber, global::System.String firstName, global::System.String lastName, global::System.String streetAddress, global::System.String city, global::System.String state, global::System.String zipCode, global::System.String email, global::System.DateTime dateCreated)
         {
             Customer customer = new Customer();
             customer.Id = id;
@@ -187,7 +190,10 @@ namespace Pivec.Promotion.Data
             customer.DriverLicenseNumber = driverLicenseNumber;
             customer.FirstName = firstName;
             customer.LastName = lastName;
-            customer.Address = address;
+            customer.StreetAddress = streetAddress;
+            customer.City = city;
+            customer.State = state;
+            customer.ZipCode = zipCode;
             customer.Email = email;
             customer.DateCreated = dateCreated;
             return customer;
@@ -372,24 +378,96 @@ namespace Pivec.Promotion.Data
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String Address
+        public global::System.String StreetAddress
         {
             get
             {
-                return _Address;
+                return _StreetAddress;
             }
             set
             {
-                OnAddressChanging(value);
-                ReportPropertyChanging("Address");
-                _Address = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("Address");
-                OnAddressChanged();
+                OnStreetAddressChanging(value);
+                ReportPropertyChanging("StreetAddress");
+                _StreetAddress = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("StreetAddress");
+                OnStreetAddressChanged();
             }
         }
-        private global::System.String _Address;
-        partial void OnAddressChanging(global::System.String value);
-        partial void OnAddressChanged();
+        private global::System.String _StreetAddress;
+        partial void OnStreetAddressChanging(global::System.String value);
+        partial void OnStreetAddressChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String City
+        {
+            get
+            {
+                return _City;
+            }
+            set
+            {
+                OnCityChanging(value);
+                ReportPropertyChanging("City");
+                _City = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("City");
+                OnCityChanged();
+            }
+        }
+        private global::System.String _City;
+        partial void OnCityChanging(global::System.String value);
+        partial void OnCityChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String State
+        {
+            get
+            {
+                return _State;
+            }
+            set
+            {
+                OnStateChanging(value);
+                ReportPropertyChanging("State");
+                _State = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("State");
+                OnStateChanged();
+            }
+        }
+        private global::System.String _State;
+        partial void OnStateChanging(global::System.String value);
+        partial void OnStateChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String ZipCode
+        {
+            get
+            {
+                return _ZipCode;
+            }
+            set
+            {
+                OnZipCodeChanging(value);
+                ReportPropertyChanging("ZipCode");
+                _ZipCode = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("ZipCode");
+                OnZipCodeChanged();
+            }
+        }
+        private global::System.String _ZipCode;
+        partial void OnZipCodeChanging(global::System.String value);
+        partial void OnZipCodeChanged();
     
         /// <summary>
         /// No Metadata Documentation available.

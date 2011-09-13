@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="PivecPromotionModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+    <Schema Namespace="PivecPromotionModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="PivecPromotionModelStoreContainer">
           <EntitySet Name="Customers" EntityType="PivecPromotionModel.Store.Customers" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Dealers" EntityType="PivecPromotionModel.Store.Dealers" store:Type="Tables" Schema="dbo" />
@@ -25,11 +25,14 @@
           <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
           <Property Name="PromotionId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="DealerId" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="SalespersonCode" Type="varchar" Nullable="false" MaxLength="25" />
-          <Property Name="DriverLicenseNumber" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="SalespersonCode" Type="varchar" Nullable="false" MaxLength="20" />
+          <Property Name="DriverLicenseNumber" Type="varchar" Nullable="false" MaxLength="20" />
           <Property Name="FirstName" Type="varchar" Nullable="false" MaxLength="25" />
           <Property Name="LastName" Type="varchar" Nullable="false" MaxLength="25" />
-          <Property Name="Address" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="StreetAddress" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="City" Type="varchar" Nullable="false" MaxLength="25" />
+          <Property Name="State" Type="varchar" Nullable="false" MaxLength="2" />
+          <Property Name="ZipCode" Type="varchar" Nullable="false" MaxLength="10" />
           <Property Name="Email" Type="varchar" Nullable="false" MaxLength="50" />
           <Property Name="DateCreated" Type="datetime" Nullable="false" />
         </EntityType>
@@ -72,8 +75,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="PivecPromotionModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
@@ -97,11 +99,14 @@
           <Property Name="Id" Type="Guid" Nullable="false" />
           <Property Name="PromotionId" Type="Guid" Nullable="false" />
           <Property Name="DealerId" Type="Guid" Nullable="false" />
-          <Property Name="SalespersonCode" Type="String" Nullable="false" MaxLength="25" Unicode="false" FixedLength="false" />
-          <Property Name="DriverLicenseNumber" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="SalespersonCode" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="DriverLicenseNumber" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
           <Property Name="FirstName" Type="String" Nullable="false" MaxLength="25" Unicode="false" FixedLength="false" />
           <Property Name="LastName" Type="String" Nullable="false" MaxLength="25" Unicode="false" FixedLength="false" />
-          <Property Name="Address" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="StreetAddress" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="City" Type="String" Nullable="false" MaxLength="25" Unicode="false" FixedLength="false" />
+          <Property Name="State" Type="String" Nullable="false" MaxLength="2" Unicode="false" FixedLength="false" />
+          <Property Name="ZipCode" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
           <Property Name="Email" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
           <Property Name="DateCreated" Type="DateTime" Nullable="false" />
           <NavigationProperty Name="Dealer" Relationship="PivecPromotionModel.FK_Customers_Dealers" FromRole="Customers" ToRole="Dealers" />
@@ -162,7 +167,10 @@
             <ScalarProperty Name="DriverLicenseNumber" ColumnName="DriverLicenseNumber" />
             <ScalarProperty Name="FirstName" ColumnName="FirstName" />
             <ScalarProperty Name="LastName" ColumnName="LastName" />
-            <ScalarProperty Name="Address" ColumnName="Address" />
+            <ScalarProperty Name="StreetAddress" ColumnName="StreetAddress" />
+            <ScalarProperty Name="City" ColumnName="City" />
+            <ScalarProperty Name="State" ColumnName="State" />
+            <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
             <ScalarProperty Name="Email" ColumnName="Email" />
             <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
@@ -196,17 +204,17 @@
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
       <Diagram Name="PivecPromotion">
-        <EntityTypeShape EntityType="PivecPromotionModel.Customer" Width="1.5" PointX="3" PointY="1" Height="3.3263964843749996" IsExpanded="true" />
-        <EntityTypeShape EntityType="PivecPromotionModel.Dealer" Width="1.5" PointX="0.75" PointY="1.875" Height="1.5956835937499996" IsExpanded="true" />
-        <EntityTypeShape EntityType="PivecPromotionModel.Promotion" Width="1.5" PointX="0.75" PointY="5.75" Height="1.7879850260416657" IsExpanded="true" />
+        <EntityTypeShape EntityType="PivecPromotionModel.Customer" Width="1.5" PointX="3" PointY="1" Height="3.9033007812499996" IsExpanded="true" />
+        <EntityTypeShape EntityType="PivecPromotionModel.Dealer" Width="1.5" PointX="0.75" PointY="2.125" Height="1.5956835937499996" IsExpanded="true" />
+        <EntityTypeShape EntityType="PivecPromotionModel.Promotion" Width="1.5" PointX="0.75" PointY="6.125" Height="1.7879850260416657" IsExpanded="true" />
         <AssociationConnector Association="PivecPromotionModel.FK_Customers_Dealers" ManuallyRouted="false">
-          <ConnectorPoint PointX="2.25" PointY="2.672841796875" />
-          <ConnectorPoint PointX="3" PointY="2.672841796875" />
+          <ConnectorPoint PointX="2.25" PointY="2.922841796875" />
+          <ConnectorPoint PointX="3" PointY="2.922841796875" />
         </AssociationConnector>
         <AssociationConnector Association="PivecPromotionModel.FK_Customers_Promotions" ManuallyRouted="false">
-          <ConnectorPoint PointX="2.25" PointY="6.6439925130208328" />
-          <ConnectorPoint PointX="3.75" PointY="6.6439925130208328" />
-          <ConnectorPoint PointX="3.75" PointY="4.326396484375" />
+          <ConnectorPoint PointX="2.25" PointY="7.0189925130208328" />
+          <ConnectorPoint PointX="3.75" PointY="7.0189925130208328" />
+          <ConnectorPoint PointX="3.75" PointY="4.90330078125" />
         </AssociationConnector>
       </Diagram>
     </Diagrams>

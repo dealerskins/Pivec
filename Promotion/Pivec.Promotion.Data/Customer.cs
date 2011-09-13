@@ -12,7 +12,6 @@ namespace Pivec.Promotion.Data
     {
         private class CustomerMetadata
         {
-            [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
             public Guid Id { get; set; }
 
             [Required]
@@ -40,7 +39,20 @@ namespace Pivec.Promotion.Data
 
             [Display(Name = "Street Address")]
             [Required]
-            public string Address { get; set; }
+            public string StreetAddress { get; set; }
+
+            [Display(Name = "City")]
+            [Required]
+            public string City { get; set; }
+
+            [Display(Name = "State")]
+            [Required]
+            public string State { get; set; }
+
+            [Display(Name = "Zip Code")]
+            [Required]
+            [RegularExpression(@"(^\d{5}$)|(^\d{5}-\d{4}$)", ErrorMessage = "Zip Code is invalid.")]
+            public string ZipCode { get; set; }
 
             [Display(Name = "eMail")]
             [Required]
