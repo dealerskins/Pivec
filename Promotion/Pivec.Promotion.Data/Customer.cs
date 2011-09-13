@@ -22,11 +22,12 @@ namespace Pivec.Promotion.Data
 
             [Display(Name = "Salesperson Code")]
             [Required]
-            [RegularExpression(@"^\d*$")]
+            [RegularExpression(@"^[a-zA-Z0-9\-]*$", ErrorMessage = "Sales person code is invalid.")]
             public string SalespersonCode { get; set; }
 
             [Display(Name = "Driver License Number")]
             [Required]
+            [RegularExpression(@"^[a-zA-Z0-9\-]*$", ErrorMessage="Driver License is invalid.")]
             public string DriverLicenseNumber { get; set; }
 
             [Display(Name = "First Name")]
@@ -54,9 +55,9 @@ namespace Pivec.Promotion.Data
             [RegularExpression(@"(^\d{5}$)|(^\d{5}-\d{4}$)", ErrorMessage = "Zip Code is invalid.")]
             public string ZipCode { get; set; }
 
-            [Display(Name = "eMail")]
+            [Display(Name = "Email Address")]
             [Required]
-            [DataType(DataType.EmailAddress)]
+            [RegularExpression(@"^([0-9a-zA-Z]([-.\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,9})$", ErrorMessage = "Email address is invalid.")]
             public string Email { get; set; }
 
             [Display(Name = "Creation Date")]

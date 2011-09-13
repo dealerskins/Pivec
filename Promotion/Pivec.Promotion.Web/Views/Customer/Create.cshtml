@@ -39,6 +39,7 @@
             @{
                 if (ViewData["LicenseError"] != null)
                 {
+                    @Html.ValidationMessageFor(model => model.DriverLicenseNumber)
                     @ViewData["ErrorMessage"]
                 }
             }
@@ -61,11 +62,35 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.Address)
+            @Html.LabelFor(model => model.StreetAddress)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Address)
-            @Html.ValidationMessageFor(model => model.Address)
+            @Html.EditorFor(model => model.StreetAddress)
+            @Html.ValidationMessageFor(model => model.StreetAddress)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.City)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.City)
+            @Html.ValidationMessageFor(model => model.City)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.State)
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("StateList", String.Empty)
+            @Html.ValidationMessageFor(model => model.State)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ZipCode)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ZipCode)
+            @Html.ValidationMessageFor(model => model.ZipCode)
         </div>
 
         <div class="editor-label">
@@ -78,7 +103,7 @@
         <p>
             <input type="submit" value="Create" />
             @{
-                if (ViewData["PromotionError"]!= null )
+                if (ViewData["PromotionError"] != null)
                 {
                     @ViewData["ErrorMessage"]
                 }
