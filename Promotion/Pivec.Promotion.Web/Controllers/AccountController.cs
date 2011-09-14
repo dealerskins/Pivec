@@ -41,7 +41,7 @@ namespace Pivec.Promotion.Web.Controllers
                     }
                     else
                     {
-                        return Redirect("/Rules");   
+                        return Redirect("~/Rules");   
                     }
                 }
                 else
