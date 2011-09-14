@@ -1,0 +1,122 @@
+﻿@using Pivec.Promotion.Data
+@model Pivec.Promotion.Web.ViewModels.CustomerExcelViewModel
+
+@{
+    Layout = null;
+    Response.ContentType = "application/vnd.ms-excel";
+    Response.AddHeader("Content-Disposition", "attachment; filename=" + Model.fileName);
+}
+
+<?xml version="1.0" encoding="utf-16"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:o="urn:schemas-microsoft-com:office:office"
+ xmlns:x="urn:schemas-microsoft-com:office:excel"
+ xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:html="http://www.w3.org/TR/REC-html40">
+    <Styles>
+  <Style ss:ID="Default" ss:Name="Normal">
+   <Alignment ss:Vertical="Bottom"/>
+   <Borders/>
+   <Font ss:FontName="Calibri" x:Family="Swiss" ss:Size="11" ss:Color="#000000"/>
+   <Interior/>
+   <NumberFormat/>
+   <Protection/>
+  </Style>
+  <Style ss:ID="s69">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Bottom"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+   <Font ss:FontName="Calibri" x:Family="Swiss" ss:Size="16" ss:Color="#000000"
+    ss:Bold="1"/>
+  </Style>
+  <Style ss:ID="s70">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Bottom"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+   <Font ss:FontName="Calibri" x:Family="Swiss" ss:Size="11" ss:Color="#000000"
+    ss:Bold="1"/>
+  </Style>
+  <Style ss:ID="s71">
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+  </Style>
+ </Styles>
+ <Worksheet ss:Name="PIVEC">
+  <Table ss:ExpandedColumnCount="10" ss:ExpandedRowCount="6" x:FullColumns="1"
+   x:FullRows="1" ss:DefaultRowHeight="15">
+   <Column ss:Width="117.75"/>
+   <Column ss:Width="89.25"/>
+   <Column ss:Width="53.25"/>
+   <Column ss:Width="51"/>
+   <Column ss:Width="122.25"/>
+   <Column ss:Width="29.25"/>
+   <Column ss:Width="23.25"/>
+   <Column ss:Width="43.5"/>
+   <Column ss:Width="117.75"/>
+   <Column ss:Width="109.5"/>
+   <Row ss:Height="21">
+    <Cell ss:MergeAcross="9" ss:StyleID="s69"><Data ss:Type="String">Registered Customers</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s70"><Data ss:Type="String">Promotion Name</Data></Cell>
+    <Cell ss:StyleID="s70"><Data ss:Type="String">Dealer Name</Data></Cell>
+    <Cell ss:StyleID="s70"><Data ss:Type="String">FirstName</Data></Cell>
+    <Cell ss:StyleID="s70"><Data ss:Type="String">LastName</Data></Cell>
+    <Cell ss:StyleID="s70"><Data ss:Type="String">StreetAddress</Data></Cell>
+    <Cell ss:StyleID="s70"><Data ss:Type="String">State</Data></Cell>
+    <Cell ss:StyleID="s70"><Data ss:Type="String">City</Data></Cell>
+    <Cell ss:StyleID="s70"><Data ss:Type="String">ZipCode</Data></Cell>
+    <Cell ss:StyleID="s70"><Data ss:Type="String">Email</Data></Cell>
+    <Cell ss:StyleID="s70"><Data ss:Type="String">DateCreated</Data></Cell>
+   </Row>
+
+        @foreach(Customer currentCustomer in Model.contents)
+        {
+            <Row>
+                <Cell>
+                    <Data ss:Type="String">@currentCustomer.Promotion.Name</Data>
+                </Cell>
+                <Cell>
+                    <Data ss:Type="String">@currentCustomer.Dealer.Name</Data>
+                </Cell>
+                <Cell>
+                    <Data ss:Type="String">@currentCustomer.FirstName</Data>
+                </Cell>
+                <Cell>
+                    <Data ss:Type="String">@currentCustomer.LastName</Data>
+                </Cell>
+                <Cell>
+                    <Data ss:Type="String">@currentCustomer.StreetAddress</Data>
+                </Cell>
+                <Cell>
+                    <Data ss:Type="String">@currentCustomer.State</Data>
+                </Cell>
+                <Cell>
+                    <Data ss:Type="String">@currentCustomer.City</Data>
+                </Cell>
+                <Cell>
+                    <Data ss:Type="String">@currentCustomer.ZipCode</Data>
+                </Cell>
+                <Cell>
+                    <Data ss:Type="String">@currentCustomer.Email</Data>
+                </Cell>
+                <Cell>
+                    <Data ss:Type="String">@currentCustomer.DateCreated</Data>
+                </Cell>
+            </Row>
+        }        
+        </Table>
+    </Worksheet>
+</Workbook>
