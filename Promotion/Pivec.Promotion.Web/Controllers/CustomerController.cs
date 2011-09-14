@@ -8,6 +8,7 @@ using System.Web;
 using System.Net.Mail;
 using System.Web.Mvc;
 using Pivec.Promotion.Data;
+using Pivec.Promotion.Web.ViewModels;
 
 namespace Pivec.Promotion.Web.Controllers
 { 
@@ -22,8 +23,26 @@ namespace Pivec.Promotion.Web.Controllers
         [Authorize(Roles = "Administrator")]
         public ViewResult Index()
         {
-            var customers = db.Customers.Include("Dealer");
-            return View(customers.ToList());
+            var customerSearchModel = GetCustomerSearchViewModel(null, string.Empty, DateTime.UtcNow.AddDays(-7).Date, DateTime.UtcNow.Date);
+
+            return View(customerSearchModel);
+        }
+
+        /// <summary>
+        /// Filters the list of customers that have been registered to the current promotion.
+        /// </summary>
+        /// <param name="dealerId">Dealer Id</param>
+        /// <param name="salespersonCode">Salesperson Code.</param>
+        /// <param name="dateFrom">Date from.</param>
+        /// <param name="dateTo">Date to.</param>
+        /// <returns></returns>
+        [Authorize(Roles = "Administrator")]
+        [HttpPost]
+        public ViewResult Index(Guid? dealerId, string salespersonCode, DateTime? dateFrom, DateTime? dateTo)
+        {
+            var customerSearchModel = GetCustomerSearchViewModel(dealerId, salespersonCode, dateFrom, dateTo);
+
+            return View(customerSearchModel);
         }
 
         /// <summary>
@@ -92,6 +111,27 @@ namespace Pivec.Promotion.Web.Controllers
         }
 
         /// <summary>
+        /// Exports to Excel the list of customers that have been registered to the current promotion.
+        /// </summary>
+        /// <returns></returns>
+        [Authorize(Roles = "Administrator")]
+        public ActionResult Export()
+        {
+            CustomerExcelViewModel mySpreadsheet = new CustomerExcelViewModel();
+
+            // Obtains the customers list based on the last filters executed
+            var customers = GetCustomersList((Guid?) Session["customerDealerId"],
+                                             (string) Session["customerSalespersonCode"],
+                                             (DateTime?) Session["customerDateFrom"],
+                                             (DateTime?) Session["customerDateFrom"]);
+
+            mySpreadsheet.contents = customers;
+            mySpreadsheet.fileName = "Pivec Promotions - Registered Customers.xls";
+
+            return View(mySpreadsheet);
+        }
+
+        /// <summary>
         /// Sends an email based on the options set in the webconfig file.
         /// </summary>
         /// <param name="toEmailAddress">The customers email address.</param>
@@ -119,13 +159,80 @@ namespace Pivec.Promotion.Web.Controllers
         /// Gets the promotion that is currently available.
         /// </summary>
         /// <returns>The id the promotion</returns>
-        private Nullable<Guid> GetActivePromotionId()
+        private Guid? GetActivePromotionId()
         {
             var promotionId = (from p in db.Promotions
                                where p.IsActive == true
                                select p.Id).FirstOrDefault();
 
             return promotionId;
+        }
+
+        /// <summary>
+        /// Gets a list of customers based on the criterion specified.
+        /// </summary>
+        /// <param name="dealerId">Dealer Id.</param>
+        /// <param name="salespersonCode">Salesperson Code.</param>
+        /// <param name="dateFrom">Date from.</param>
+        /// <param name="dateTo">Date to.</param>
+        /// <returns></returns>
+        private IEnumerable<Customer> GetCustomersList(Guid? dealerId, string salespersonCode, DateTime? dateFrom, DateTime? dateTo)
+        {
+            var customers = from c in db.Customers.Include("Dealer")
+                            where c.Promotion.IsActive == true
+                            select c;
+            
+            if (dealerId.HasValue)
+            {
+                customers = customers.Where(c => c.DealerId == dealerId.Value);
+            }
+
+            if (!string.IsNullOrEmpty(salespersonCode))
+            {
+                customers = customers.Where(c => c.SalespersonCode == salespersonCode);
+            }
+
+            if (dateFrom.HasValue)
+            {
+                customers = customers.Where(c => c.DateCreated >= dateFrom);
+            }
+
+            if (dateTo.HasValue)
+            {
+                dateTo = dateTo.Value.AddDays(1).Date;
+
+                customers = customers.Where(c => c.DateCreated < dateTo);
+            }
+
+            return customers.ToList();
+        }
+
+        /// <summary>
+        /// Gets the view model for the customer search.
+        /// </summary>
+        /// <param name="dealerId">Dealer Id</param>
+        /// <param name="salespersonCode">Salesperson Code.</param>
+        /// <param name="dateFrom">Date from.</param>
+        /// <param name="dateTo">Date to.</param>
+        /// <returns></returns>
+        private CustomerSearchViewModel GetCustomerSearchViewModel(Guid? dealerId, string salespersonCode, DateTime? dateFrom, DateTime? dateTo)
+        {
+            var customerSearchModel = new CustomerSearchViewModel();
+
+            // Stores in session the values used to build the model
+            Session["customerDealerId"] = dealerId;
+            Session["customerSalespersonCode"] = salespersonCode;
+            Session["customerDateFrom"] = dateFrom;
+            Session["customerDateTo"] = dateTo;
+
+            // Builds the view model
+            customerSearchModel.DealerId = new SelectList(db.Dealers, "Id", "Name");
+            customerSearchModel.DateFrom = dateFrom;
+            customerSearchModel.DateTo = dateTo;
+            customerSearchModel.SalespersonCode = salespersonCode;
+            customerSearchModel.Customers = GetCustomersList(dealerId, salespersonCode, dateFrom, dateTo);
+
+            return customerSearchModel;
         }
 
         /// <summary>
