@@ -14,7 +14,6 @@ namespace Pivec.Promotion.Web.Controllers
 
         public ActionResult Index()
         {
-            FormsAuthentication.SignOut();
             return View();
         }
 

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Web;
 using System.Net.Mail;
 using System.Web.Mvc;
+using System.Web.Security;
 using Pivec.Promotion.Data;
 using Pivec.Promotion.Web.ViewModels;
 
@@ -102,7 +103,8 @@ namespace Pivec.Promotion.Web.Controllers
                 SendThankYouEmail(customer.Email, customer.FirstName, customer.LastName);
 
                 // Logs off the user and returns them to the Login Page.
-                return RedirectToAction("LogOff", "Account");
+                FormsAuthentication.SignOut();
+                return RedirectToAction("Index", "Confirmation");
             }
 
             ViewBag.DealerId = new SelectList(db.Dealers, "Id", "Name", customer.DealerId);

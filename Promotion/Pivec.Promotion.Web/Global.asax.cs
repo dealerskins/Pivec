@@ -21,11 +21,6 @@ namespace Pivec.Promotion.Web
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
             routes.MapRoute(
-                "Error",
-                "error/{errorMessage}",
-                new { controller = "Error", action = "Error", errorMessage = UrlParameter.Optional }
-                );
-            routes.MapRoute(
                 "LogOn", // Route name
                 "", // URL with parameters
                 new { controller = "Account", action = "LogOn" } // Parameter defaults
