@@ -34,7 +34,7 @@ namespace Pivec.Promotion.Web.Controllers
         public ActionResult Create()
         {
             ViewBag.DealerId = new SelectList(db.Dealers, "Id", "Name");
-            ViewBag.StateList = new SelectList(GetStateList(), "Value", "Text");
+            ViewBag.State = new SelectList(GetStateList(), "Value", "Text");
             return View();
         }
 
@@ -61,7 +61,7 @@ namespace Pivec.Promotion.Web.Controllers
                     ViewData.Add(new KeyValuePair<string, object>("PromotionError", true));
                     ViewData.Add(new KeyValuePair<string, object>("ErrorMessage", "There are no active promotions."));
                     ViewBag.DealerId = new SelectList(db.Dealers, "Id", "Name", customer.DealerId);
-                    ViewBag.StateList = new SelectList(GetStateList(), "Value", "Text", customer.State);
+                    ViewBag.State = new SelectList(GetStateList(), "Value", "Text", customer.State);
                     return View(customer);
                 }
 
@@ -70,7 +70,7 @@ namespace Pivec.Promotion.Web.Controllers
                     ViewData.Add(new KeyValuePair<string, object>("LicenseError", true));
                     ViewData.Add(new KeyValuePair<string, object>("ErrorMessage", String.Format("{0} {1} has already been included in the current promotion", customer.FirstName, customer.LastName)));
                     ViewBag.DealerId = new SelectList(db.Dealers, "Id", "Name", customer.DealerId);
-                    ViewBag.StateList = new SelectList(GetStateList(), "Value", "Text", customer.State);
+                    ViewBag.State = new SelectList(GetStateList(), "Value", "Text", customer.State);
                     return View(customer);
                 }
                 
@@ -87,7 +87,7 @@ namespace Pivec.Promotion.Web.Controllers
             }
 
             ViewBag.DealerId = new SelectList(db.Dealers, "Id", "Name", customer.DealerId);
-            ViewBag.StateList = new SelectList(GetStateList(), "Value", "Text", customer.State);
+            ViewBag.State = new SelectList(GetStateList(), "Value", "Text", customer.State);
             return View(customer);
         }
 

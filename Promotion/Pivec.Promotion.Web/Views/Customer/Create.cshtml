@@ -1,4 +1,4 @@
-﻿@model Pivec.Promotion.Data.Customer
+﻿    @model Pivec.Promotion.Data.Customer
 
 @{
     ViewBag.Title = "Customer Form";
@@ -18,7 +18,7 @@
             @Html.LabelFor(model => model.DealerId, "Dealer")
         </div>
         <div class="editor-field">
-            @Html.DropDownList("DealerId", String.Empty)
+            @Html.DropDownList("DealerId", "Select One")
             @Html.ValidationMessageFor(model => model.DealerId)
         </div>
 
@@ -78,10 +78,10 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.State)
+            @Html.LabelFor(model => model.State, "State")
         </div>
         <div class="editor-field">
-            @Html.DropDownList("StateList", String.Empty)
+            @Html.DropDownList("State", "Select One")
             @Html.ValidationMessageFor(model => model.State)
         </div>
 
