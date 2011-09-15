@@ -1,0 +1,241 @@
+﻿html, body { 
+font: normal 12px Arial, Verdana, Trebuchet MS, Geneva, Helvetica, sans-serif; 
+color: #fff; 
+}
+
+/*Full site (hdr, content, ftr) container*/
+#container{
+margin: 0 auto;
+width: 974px;
+text-align: left;
+}
+
+/*for forms & content*/
+Table
+{
+    background-color:#fff;
+    text-align:left;
+    table-layout:fixed;
+}
+TH
+{
+    background-color:#000;
+    color:#fff;
+    border-bottom: 1px solid #000;
+    padding:5px;
+}
+TD { 
+font: normal .9em/1.5em Arial, Verdana, Trebuchet MS, Geneva, Helvetica, sans-serif; 
+padding:5px;
+color: #000;  
+text-align:left;
+}
+
+.siteBG 
+{
+    background: #000 url(/content/siteBG.jpg) no-repeat center top;
+}
+
+/*COMMON ELEMENTS*/
+.bordered{ border: 1px solid #000;}
+img { border: 0px; }
+
+a { color : #CA0F00; }
+a:hover, a:visited { color : #CA0F00; }
+
+.itemBorder { border: 1px solid #666; } 
+.Hidden     {visibility: hidden;}   
+.NoDisplay  {visibility: hidden; display: none;}
+.Visible    {visibility: visible;}      
+.bckWhite    { background-color: #fff; }
+.bckBlack    { background-color: #000; }
+.bckPopUp1   { background-color: #fff; background-image: url(/images/bckPopup.jpg); background-repeat: no-repeat; }
+.bckPopUp2   { background-color: #fff; background-image: url(/images/bckPopup.jpg); background-repeat: no-repeat; }
+.bckPopup { background: #ccc; }
+
+.subtitle { 
+color: #829ABF; 
+font-size : 13px; 
+font-weight: bold; 
+}
+.subhead { 
+color: #829ABF; 
+font-size : 13px; 
+font-weight: bold; 
+}
+.subhead a:link, .subhead a:active, .subhead a:visited { 
+    color : #829ABF; 
+    text-decoration : none; 
+    font-weight: bold; 
+}
+.subhead a:hover { 
+    color : #fff; 
+    text-decoration : underline; 
+}   
+h1    { 
+color: #000; 
+font-size : 1.5em; 
+line-height: 1.5em;
+font-weight: bold; 
+margin: 0;
+}
+h2 { 
+color: #fff; 
+font-size : 1.5em; 
+font-weight: bold; 
+margin: 0;
+}
+h2 a:link, h2 a:active, h2 a:visited { 
+    color : #829ABF; 
+    text-decoration : none; 
+    font-weight: bold; 
+}
+h2 a:hover { 
+    color : #fff; 
+    text-decoration : underline; 
+}   
+/*END COMMON ELEMENTS*/
+
+
+/*Header Content div styles*/
+#header {
+height: 150px;
+text-align: left;
+position: relative;
+}
+
+#header a:link, #header a:active, #header a:visited { 
+color: #fff;
+text-decoration: underline;
+}
+
+#header a:hover {
+color: #ccc;
+text-decoration: none;
+}
+
+#logo { 
+position: absolute;
+top: 75px;
+left: 100px;
+}
+
+#logo2 { 
+position: absolute;
+top: 75px;
+right: 100px;
+}
+
+#address a{ color: #003366; }
+
+#address a:hover {
+color: #333;
+text-decoration: none;
+}
+
+#address a:visited { color: #ccc;}
+/*---------------------*/
+
+/*default.asp Homepage Styles*/
+#hmContent{
+margin: 0 auto;
+text-align: left;
+}
+
+#hmTop{
+height: 306px;
+position: relative;
+}
+
+#hmTop a {
+color: #fff;
+text-decoration: underline;
+}
+#hmTop a:hover {
+text-decoration: none;
+}
+
+#pierson {
+width: auto;
+height: auto;
+text-align: center;
+color: #fff;
+font-weight: bold;
+margin: 500px 0 0 75px;
+float: left;
+}
+#pierson p { margin: 0 auto; }
+
+#pearson {
+width: auto;
+height: auto;
+text-align: center;
+color: #fff;
+font-weight: bold;
+margin: 500px 75px 0 0;
+float: right;
+}
+#pearson p { margin: 0 auto; }
+
+.left {float: left;}
+.right {float: right;}
+
+
+/*NAV ELEMENTS
+.bckNav      { background: #403e3e url(/images/bckNav.gif) repeat-x; }
+#navContainer { text-align: left; }
+#nav, #nav ul { 
+    padding: 0;
+    margin: 0;
+    list-style-type: none; 
+    line-height: 20px; 
+    z-index: 55;
+    }
+
+#nav a {
+    display: block; 
+    font-size: 11px;
+    color: #000;
+    text-decoration: none;
+    width: 100%; 
+}   
+#nav a.parent {
+    background: url(/images/arrow.gif) no-repeat; background-position: 95% 50%; 
+}   
+#nav a.parent:hover {
+    background: url(/images/arrow.gif) center no-repeat; background-position: 95% 50%; 
+    background-color: #cc0000; 
+}
+#nav a:hover {
+    background: #cc0000; 
+    text-decoration: none;
+    color: #fff;
+}   
+#nav li { 
+    float: left;
+    white-space: nowrap; 
+}
+#nav li ul { 
+    z-index: 3; 
+    border: 1px solid #999; border-bottom-style: none; 
+    padding: 0px; 
+    position: absolute;
+    background: #ccc; 
+    width: 130px; 
+    width: expression('132px'); 
+    left: -999em; 
+}   
+#nav li ul li {
+    width: 100%;
+    border-bottom: 1px solid #999; 
+}
+#nav li ul ul { 
+    margin: -21px 0 0 130px; 
+}
+#nav li:hover ul ul, #nav li.sfhover ul ul {
+    left: -999em; 
+}
+#nav li:hover ul, #nav li li:hover ul, #nav li.sfhover ul, #nav li li.sfhover ul { 
+    left: auto; 
+}
+END NAV ELEMENTS*/

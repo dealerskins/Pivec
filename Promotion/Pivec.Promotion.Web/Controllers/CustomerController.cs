@@ -53,7 +53,7 @@ namespace Pivec.Promotion.Web.Controllers
         [Authorize]
         public ActionResult Create()
         {
-            ViewBag.DealerId = new SelectList(db.Dealers, "Id", "Name");
+            ViewBag.DealerId = new SelectList(db.Dealers.AsQueryable<Dealer>().OrderBy(d => d.Name), "Id", "Name");
             ViewBag.State = new SelectList(GetStateList(), "Value", "Text");
             return View();
         }
@@ -125,10 +125,31 @@ namespace Pivec.Promotion.Web.Controllers
             var customers = GetCustomersList((Guid?) Session["customerDealerId"],
                                              (string) Session["customerSalespersonCode"],
                                              (DateTime?) Session["customerDateFrom"],
-                                             (DateTime?) Session["customerDateFrom"]);
+                                             (DateTime?) Session["customerDateTo"]);
 
             mySpreadsheet.contents = customers;
             mySpreadsheet.fileName = "Pivec Promotions - Registered Customers.xls";
+
+            return View(mySpreadsheet);
+        }
+
+        /// <summary>
+        /// Exports to CSV the list of customers that have been registered to the current promotion.
+        /// </summary>
+        /// <returns></returns>
+        [Authorize(Roles = "Administrator")]
+        public ActionResult ExportCSV()
+        {
+            CustomerExcelViewModel mySpreadsheet = new CustomerExcelViewModel();
+
+            // Obtains the customers list based on the last filters executed
+            var customers = GetCustomersList((Guid?)Session["customerDealerId"],
+                                             (string)Session["customerSalespersonCode"],
+                                             (DateTime?)Session["customerDateFrom"],
+                                             (DateTime?)Session["customerDateTo"]);
+
+            mySpreadsheet.contents = customers;
+            mySpreadsheet.fileName = "RegisteredCustomers.csv";
 
             return View(mySpreadsheet);
         }

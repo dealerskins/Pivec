@@ -12,7 +12,14 @@
 <script language="javascript" type="text/javascript">
     $(document).ready(function () {
         $('.date').datepicker({ dateFormat: "mm/dd/yy" });
+		$("#btnExport").click(
+			function () {
+				document.location.href='/customer/exportcsv'
+			}
+		);
     });
+
+
 </script>
 
 @using (Html.BeginForm())
@@ -21,50 +28,40 @@
          @Html.ValidationSummary(true)
 
          <fieldset>
-             <legend>Filters</legend>
+
 
              <div class="editor-label">
                  @Html.LabelFor(model => model.DealerId)
-             </div>
-             <div class="editor-field">
+
                  @Html.DropDownList("DealerId", "All")
                  @Html.ValidationMessageFor(model => model.DealerId)
-             </div>
-
-             <div class="editor-label">
+				 </div>
+				 <div class="editor-label">
                  @Html.LabelFor(model => model.SalespersonCode)
-             </div>
-             <div class="editor-field">
+
                  @Html.EditorFor(model => model.SalespersonCode)
                  @Html.ValidationMessageFor(model => model.SalespersonCode)
-             </div>
-
-             <div class="editor-label">
+				 </div>
+				 <div class="editor-label">
                  @Html.LabelFor(model => model.DateFrom)
-             </div>
-             <div class="editor-field">
+
                 @Html.TextBox("DateFrom", (Model.DateFrom.HasValue ? Model.DateFrom.Value.ToShortDateString() : string.Empty), new { @class = "date" })
-             </div>
 
-             <div class="editor-label">
                  @Html.LabelFor(model => model.DateTo)
-             </div>
-             <div class="editor-field">
-                @Html.TextBox("DateTo", (Model.DateTo.HasValue ? Model.DateTo.Value.ToShortDateString() : string.Empty), new { @class = "date" })
-             </div>
 
+                @Html.TextBox("DateTo", (Model.DateTo.HasValue ? Model.DateTo.Value.ToShortDateString() : string.Empty), new { @class = "date" })
              <p>
                  <input type="submit" value="Search" />
              </p>
+             </div>
+
+
          </fieldset>
      </div>
  }  
     
 <table>
     <tr>
-        <th>
-            Promotion
-        </th>
         <th>
             Dealer
         </th>
@@ -95,15 +92,12 @@
         <th>
             Date Created
         </th>
-        <th></th>
+
     </tr>
 
 @foreach (var item in Model.Customers)
 {
     <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Promotion.Name)
-        </td>
         <td>
             @Html.DisplayFor(modelItem => item.Dealer.Name)
         </td>
@@ -139,4 +133,5 @@
 
 </table>
 
-@Html.ActionLink("Export to Excel", "Export", "Customer")
+<button id="btnExport">Export to Excel</button>
+@*@Html.ActionLink("Export to Excel", "Export", "Customer")*@

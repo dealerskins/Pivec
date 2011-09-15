@@ -1,0 +1,35 @@
+﻿@using Pivec.Promotion.Data
+@using System.Text
+@model Pivec.Promotion.Web.ViewModels.CustomerExcelViewModel
+@{
+    Layout = null;
+    Response.ContentType = "text/csv";
+    Response.AddHeader("Content-Disposition", "attachment; filename=" + Model.fileName);
+}
+"Dealer Name","FirstName","LastName","StreetAddress","City","State","ZipCode","Email","DateCreated" 
+@{
+	foreach(Customer currentCustomer in Model.contents)
+	{
+		var Line = new StringBuilder();
+		Line.Append(@currentCustomer.Dealer.Name);
+		Line.Append(",");
+		Line.Append(@currentCustomer.FirstName);
+		Line.Append(",");
+		Line.Append(@currentCustomer.LastName);
+		Line.Append(",");
+		Line.Append(@currentCustomer.StreetAddress);
+		Line.Append(",");
+		Line.Append(@currentCustomer.City);
+		Line.Append(",");
+		Line.Append(@currentCustomer.State);
+		Line.Append(",");
+		Line.Append(@currentCustomer.ZipCode);
+		Line.Append(",");
+		Line.Append(@currentCustomer.Email);
+		Line.Append(",");
+		Line.Append(@currentCustomer.DateCreated);
+		Line.Append(Environment.NewLine);
+
+		@Line.ToString();
+	}
+}
